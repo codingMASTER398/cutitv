@@ -1,0 +1,79 @@
+body {
+  background-color: black;
+  overflow-x: hidden;
+}
+
+.contentWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+
+  background: linear-gradient(rgba(32, 0, 55, 0.7),
+      rgba(32, 0, 55, 0.7)), url(/nerd/img/bgtemp.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.content * {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+}
+
+.content {
+  color: white;
+  font-size: 0.7rem;
+}
+
+.taskbar {
+  height: 3rem;
+  width: 100vw;
+  background: transparent;
+  padding: 1rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-family: "Old Standard TT";
+  text-shadow: 0 0 3px black;
+
+  background: -webkit-linear-gradient(-80deg, #eee, white);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+
+  position: relative;
+}
+.logo::after {
+  position: absolute;
+  content: "alpha";
+  bottom: -3px;
+  left: 90%;
+  color: black;
+
+  -webkit-text-fill-color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: x-small;
+  background-color: black;
+  padding-left: 12px;
+  padding-right: 12px;
+  transform: skewY(-10deg);
+}
+.logo span {
+  font-size: x-large;
+}
+
+.taskbar .right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+a {
+  color: white;
+}

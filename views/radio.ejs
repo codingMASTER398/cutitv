@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<head>
+  <%- include("incl/head") %>
+    <%- include("incl/loading") %>
+</head>
+
+<body>
+  <%- include("incl/loadingContent") %>
+
+    <script defer>
+      window.data = JSON.parse(`<%-JSON.stringify(data)%>`)
+    </script>
+    <script defer src="/socket.io/socket.io.js"></script>
+    <script defer src="/nerd/js/radioBase.js"></script>
+    <script defer src="/nerd/js/playerAPI.js"></script>
+    <script defer src="https://www.youtube.com/iframe_api"></script>
+
+    <link href="/nerd/css/radio.css" rel="stylesheet" rel="preload" as="style">
+    <link href="/nerd/css/radioPlayer.css" rel="stylesheet" rel="preload" as="style">
+
+    <div class="contentWrapper">
+      <div class="content">
+        <!-- Taskbar -->
+        <div class="taskbar">
+          <h1 class="logo">
+            cuti<span>.tv</span>
+          </h1>
+          <div class="right">
+            <h2>
+              <a href="<%=radio.artistSite%>" target="_blank">
+                <%=radio.title%>
+              </a> radio
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content player -->
+      <div class="sbsWrap">
+        <div class="sideBySide">
+          <div class="left">
+            <div id="yt-player"></div>
+          </div>
+          <div class="right">
+            <h2>Experimental Vylet Pony radio :3</h2>
+            <p>Chat room will go here eventually. Currently playing <span id="currentlyPlaying"></span> from <span id="currentlyPlayingAlbum"></span>.</p>
+            <p>~ <a href="https://coding398.dev" target="_blank">coding398.dev</a>. add me on discord: coding398</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
