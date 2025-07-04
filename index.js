@@ -33,5 +33,5 @@ app.set('view engine', 'ejs')
 
     new room("vyletpony")
 
-    server.listen(3000)
+    server.listen(process.env.PORT)
   })()
