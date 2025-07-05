@@ -1,0 +1,34 @@
+:root:has(body.heretic) {
+  transition: 0.1s;
+  --base-transition-out: ease-out;
+  --font: "Orbitron";
+  --fancy-font: "Orbitron";
+
+  --beat-top: -16px;
+  --beat-bottom: -16px;
+}
+
+body.heretic .volumeSlider {
+  background: black;
+  border: 2px solid var(--base-color);
+}
+
+body.heretic iframe {
+  border: 2px solid var(--base-color);
+}
+
+body.heretic.beat .titleBox {
+  animation: beatTop 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.heretic.beat .volumeSlider {
+  animation: beatLyricRev 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.heretic.beat iframe {
+  animation: beatBoxShadow 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.heretic iframe {
+  box-shadow: -12px 12px 0 var(--dark-base);
+}

@@ -1,0 +1,46 @@
+input[type="range"] {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 10px; /* Specified height */
+  background: rgba(255,255,255,0.5); /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  box-shadow: -3px 3px rgba(255, 255, 255, 0.3);
+
+  transition: 0.1s var(--base-transition-out);
+}
+
+/* Mouse-over effects */
+input[type="range"]:hover {
+  opacity: 1;
+}
+
+input[type="range"]:active {
+  transform: translateY(3px);
+  transition: 0.1s var(--base-transition-out);
+}
+.volumeSlider:has(input[type="range"]:active) {
+  transform: skewY(-7deg);
+  transition: 0.1s var(--base-transition-out);
+}
+
+input[type="range"]::-webkit-slider-thumb, input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: var(--base-color);
+  cursor: pointer;
+  border-radius: 0;
+  box-shadow: -3px 3px rgba(255, 255, 255, 0.3);
+  transition: 0.1s var(--base-transition-out);
+}
+
+input[type="range"]:active::-webkit-slider-thumb, input[type="range"]:active::-moz-range-thumb {
+  transform: translateY(-3px);
+  box-shadow: -3px 6px rgba(255, 255, 255, 0.5);
+  transition: 0.1s var(--base-transition-out);
+}

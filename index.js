@@ -26,6 +26,10 @@ app.set('view engine', 'ejs')
       maxAge: DEVELOPMENT ? 0 : 10_000
     }))
 
+    app.use("/subTiming", express.static("./devutil/subTiming", {
+      maxAge: DEVELOPMENT ? 0 : 10_000
+    }))
+
     app.get("/", (req, res) => {
       radioPage.render("vyletpony", req, res)
       //res.send("hi luna & meow person i dont' actually know the real name of.<br>got to get a db and infra set up so this will be placeholder for a while.<br>basically a <b>Vylet Pony radio station</b><br><br><a href='https://coding398.dev'>coding398.dev</a>")

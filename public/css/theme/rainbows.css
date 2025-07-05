@@ -1,0 +1,68 @@
+body.rainbows .sbsWrap {
+  background: repeating-linear-gradient(45deg,
+      rgba(255, 0, 0, 0.1) 0px,
+      /* Red */
+      rgba(255, 0, 0, 0.1) 20px,
+      rgba(255, 127, 0, 0.1) 20px,
+      /* Orange */
+      rgba(255, 127, 0, 0.1) 40px,
+      rgba(255, 255, 0, 0.1) 40px,
+      /* Yellow */
+      rgba(255, 255, 0, 0.1) 60px,
+      rgba(0, 255, 0, 0.1) 60px,
+      /* Green */
+      rgba(0, 255, 0, 0.1) 80px,
+      rgba(0, 0, 255, 0.1) 80px,
+      /* Blue */
+      rgba(0, 0, 255, 0.1) 100px,
+      rgba(75, 0, 130, 0.1) 100px,
+      /* Indigo */
+      rgba(75, 0, 130, 0.1) 120px,
+      rgba(148, 0, 211, 0.1) 120px,
+      /* Violet */
+      rgba(148, 0, 211, 0.1) 140px);
+
+}
+
+:root:has(body.rainbows) {
+  transition: 0.1s;
+  --base-transition-out: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --font: "Fugaz One";
+  --fancy-font: "Barriecito";
+
+  --beat-top: -16px;
+  --beat-bottom: -24px;
+}
+
+body.rainbows .volumeSlider, body.rainbows .volumeSlider i {
+  background: var(--above-base-color);
+  color: var(--dark-base);
+}
+
+body.rainbows input[type="range"]::-webkit-slider-thumb, body.rainbows input[type="range"]::-moz-range-thumb {
+  background: var(--dark-base);
+}
+
+body.rainbows iframe, body.rainbows .volumeSlider {
+  border: 8px var(--above-base-color);
+  border-style: dotted dashed solid double;
+}
+
+body.rainbows.beat .titleBox {
+  animation: beatTop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body.rainbows.beat .volumeSlider {
+  animation: beatLyricRev 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body.rainbows.beat iframe {
+  animation: beatBoxShadow 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body.rainbows .titleBox #currentlyPlaying {
+  background-color: var(--above-base-color);
+}
+body.rainbows .titleBox #currentlyPlayingAlbum {
+  background-color: var(--light-base);
+}

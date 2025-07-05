@@ -3,10 +3,15 @@
 <head>
   <%- include("incl/head") %>
     <%- include("incl/loading") %>
+
+      <meta name="description" content="<%=radio.title%> radio >> cuti.tv">
+      <meta name="keywords" content="<%=radio.title%> radio">
 </head>
 
 <body>
   <%- include("incl/loadingContent") %>
+
+    <style id="dynamicTheme"></style>
 
     <script defer>
       window.data = JSON.parse(`<%-JSON.stringify(data)%>`)
@@ -14,10 +19,22 @@
     <script defer src="/socket.io/socket.io.js"></script>
     <script defer src="/nerd/js/radioBase.js"></script>
     <script defer src="/nerd/js/playerAPI.js"></script>
+    <script defer src="/nerd/js/lyric.js"></script>
+    <script defer src="/nerd/js/themer.js"></script>
+    <script defer src="/nerd/js/beat.js"></script>
     <script defer src="https://www.youtube.com/iframe_api"></script>
 
     <link href="/nerd/css/radio.css" rel="stylesheet" rel="preload" as="style">
     <link href="/nerd/css/radioPlayer.css" rel="stylesheet" rel="preload" as="style">
+    <link href="/nerd/css/boringstyling.css" rel="stylesheet" rel="preload" as="style">
+    <link href="/nerd/css/beats.css" rel="stylesheet" rel="preload" as="style">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet' rel="preload" as="style">
+
+    <!-- Themes -->
+    <link href="/nerd/css/theme/basscannon.css" rel="stylesheet" rel="preload" as="style">
+    <link href="/nerd/css/theme/windows.css" rel="stylesheet" rel="preload" as="style">
+    <link href="/nerd/css/theme/heretic.css" rel="stylesheet" rel="preload" as="style">
+    <link href="/nerd/css/theme/rainbows.css" rel="stylesheet" rel="preload" as="style">
 
     <div class="contentWrapper">
       <div class="content">
@@ -40,11 +57,26 @@
       <div class="sbsWrap">
         <div class="sideBySide">
           <div class="left">
-            <div id="yt-player"></div>
+            <div id="yt-player-wrapper">
+              <div id="yt-player-wrapper-wrapper">
+                <div id="yt-player"></div>
+              </div>
+              <div class="volumeSlider">
+                <i class='bxr  bx-volume-full'></i>
+                <input class="volumeSliderRange" type="range" min="0" max="100" step="1">
+              </div>
+              <div class="lyricsBox">
+                <p class="lyric">LYRIC GOES HERE</p>
+              </div>
+              <div class="titleBox">
+                <h3 id="currentlyPlaying"></h3>
+                <h4 id="currentlyPlayingAlbum"></h4>
+              </div>
+            </div>
           </div>
           <div class="right">
             <h2>Experimental Vylet Pony radio :3</h2>
-            <p>Chat room will go here eventually. Currently playing <span id="currentlyPlaying"></span> from <span id="currentlyPlayingAlbum"></span>.</p>
+            <p>Chat room will go here eventually.</p>
             <p>~ <a href="https://coding398.dev" target="_blank">coding398.dev</a>. add me on discord: coding398</p>
           </div>
         </div>

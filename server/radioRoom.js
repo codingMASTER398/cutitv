@@ -43,7 +43,7 @@ class room {
     if (!this.currentTrack?.id || Date.now() > this.currentTrack.nowEndTimer) {
       const chooseFrom = this.dbData.possibleTracks.filter((a) => !this.lastTenTracks.includes(a))
       const possibleTracks = await db.tracks.find({ id: { $in: chooseFrom } }).toArray();
-      const nextTrack = possibleTracks[Math.floor(Math.random() * possibleTracks.length)]
+      const nextTrack = /*possibleTracks.find((t)=>t.title == "LESBIAN PONIES WITH WEAPONS") || */possibleTracks[Math.floor(Math.random() * possibleTracks.length)];
 
       this.currentTrack = nextTrack
       this.currentTrack.nowEndTimer = Date.now() + (nextTrack.endTime ? (nextTrack.endTime - nextTrack.startTime) * 1000 : nextTrack.length * 1000)

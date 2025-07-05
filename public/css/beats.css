@@ -1,0 +1,39 @@
+body.beat iframe {
+  animation: beatBoxShadow 0.1s;
+}
+
+body.beat .lyricsBox {
+  /*animation: beatLyric 0.1s;*/
+}
+
+body.beat .titleBox {
+  animation: beatTop 0.1s;
+}
+
+body.beat .volumeSlider{
+  animation: beatLyricRev 0.1s;
+}
+
+@keyframes beatBoxShadow {
+  0%{
+    box-shadow: 0 0 120px rgba(255, 255, 255, 0.4), 0 0 0 var(--above-base-color);
+  }
+}
+
+@keyframes beatLyric {
+  0% {
+    bottom: var(--beat-bottom);
+  }
+}
+
+@keyframes beatLyricRev {
+  0% {
+    bottom: calc(-1 * var(--beat-bottom));
+  }
+}
+
+@keyframes beatTop {
+  0%{
+    top: var(--beat-top);
+  }
+}

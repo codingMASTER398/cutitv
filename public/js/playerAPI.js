@@ -30,6 +30,7 @@ function initPlayer() {
 
           player.seekTo(getSeekTime())
           player.playVideo()
+          player.setVolume(localStorage.getItem(`volume`) || 50)
         }, { once: true })
       },
       'onStateChange': () => { }
@@ -37,13 +38,29 @@ function initPlayer() {
   });
 
   setInterval(() => {
-    if (![1,3].includes(player.getPlayerState())) {
+    if (![1, 3].includes(player.getPlayerState())) {
       player.seekTo(getSeekTime())
       player.playVideo()
       //console.log(1)
-    } else if(Math.abs(player.getCurrentTime() - getSeekTime()) > 0.5) {
+    } else if (Math.abs(player.getCurrentTime() - getSeekTime()) > 0.5) {
       player.seekTo(getSeekTime())
       //console.log(2)
     }
   }, 250)
+
+  setInterval(processLyrics, 100)
+  setInterval(processThemes, 100)
+  requestAnimationFrame(processSickBeats)
+
+  processLyrics();
+  processThemes();
 }
+
+const volumeSlider = document.querySelector(`.volumeSliderRange`);
+
+volumeSlider.value = localStorage.getItem(`volume`) || 50
+
+volumeSlider.addEventListener(`input`, () => {
+  localStorage.setItem(`volume`, volumeSlider.value)
+  player.setVolume(volumeSlider.value)
+})

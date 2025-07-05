@@ -1,3 +1,7 @@
+const imgOverrides = {
+  "UCAisUe6-VA": "/nerd/img/lesbianPonies.png"
+}
+
 function loadingOut() {
   document.querySelector(`#loading`).classList.remove(`clickContinue`)
   document.querySelector(`#loading`).classList.add(`out`)
@@ -9,10 +13,26 @@ function loadingIn() {
 
 function updateCurrentlyPlaying() {
   document.querySelector(`#currentlyPlaying`).innerText = window.currentTrack.title
-  document.querySelector(`#currentlyPlayingAlbum`).innerText = window.currentTrack.album
+  document.querySelector(`#currentlyPlayingAlbum`).innerText = window.currentTrack.album + (window.currentTrack.feat ? `, feat. ${window.currentTrack.feat}` : "")
+
+  document.querySelector('#dynamicTheme').innerHTML = `
+  .contentWrapper {
+    background: linear-gradient(
+      var(--dark-base-alpha),
+      var(--dark-base-alpha)
+    ), url("${imgOverrides[window.currentTrack.ytID] || `https://img.youtube.com/vi/${window.currentTrack.ytID}/maxresdefault.jpg`}");
+  }
+`;
+
+  document.title = window.currentTrack.title
 }
 
-document.addEventListener("DOMContentLoaded", (event) => {
+function load() {
+  if (!window.io) {
+    setTimeout(load, 100)
+    return;
+  }
+
   const loadingContent = document.querySelector(`#loadingContent`)
 
   loadingContent.innerText = "Connecting"
@@ -31,8 +51,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     loadingContent.innerText = "Loading YT embed"
     window.currentTrack = data.currentTrack
 
-    initPlayer();
     updateCurrentlyPlaying();
+    initPlayer();
   })
 
   socket.on("disconnecting_reason", (data) => {
@@ -40,9 +60,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     loadingIn();
   })
 
-  socket.on("trackChange", (data)=>{
+  socket.on("trackChange", (data) => {
     window.currentTrack = data;
     player.loadVideoById(data.ytID)
     updateCurrentlyPlaying();
   })
-});
+}
+
+document.addEventListener("DOMContentLoaded", load);
