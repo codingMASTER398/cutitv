@@ -42,7 +42,7 @@ class room {
   async tick() {
     if (!this.currentTrack?.id || Date.now() > this.currentTrack.nowEndTimer) {
       const chooseFrom = this.dbData.possibleTracks.filter((a) => !this.lastTenTracks.includes(a))
-      const possibleTracks = await db.tracks.find({ id: { $in: chooseFrom } }).toArray();
+      const possibleTracks = (await db.tracks.find({ id: { $in: chooseFrom } }).toArray()).filter((t)=>t.album != "Monarch of Monsters");
       const nextTrack = /*possibleTracks.find((t)=>t.title == "LESBIAN PONIES WITH WEAPONS") || */possibleTracks[Math.floor(Math.random() * possibleTracks.length)];
 
       this.currentTrack = nextTrack
