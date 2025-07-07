@@ -21,12 +21,14 @@
     <script defer src="/nerd/js/lyric.js"></script>
     <script defer src="/nerd/js/themer.js"></script>
     <script defer src="/nerd/js/beat.js"></script>
+    <script defer src="/nerd/js/voter.js"></script>
     <script defer src="https://www.youtube.com/iframe_api"></script>
 
     <link href="/nerd/css/radio.css" rel="stylesheet" rel="preload" as="style">
     <link href="/nerd/css/radioPlayer.css" rel="stylesheet" rel="preload" as="style">
     <link href="/nerd/css/boringstyling.css" rel="stylesheet" rel="preload" as="style">
     <link href="/nerd/css/beats.css" rel="stylesheet" rel="preload" as="style">
+    <link href="/nerd/css/trackVotes.css" rel="stylesheet" rel="preload" as="style">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet' rel="preload" as="style">
 
     <!-- Themes -->
@@ -66,6 +68,7 @@
               </div>
               <div class="lyricsBox">
                 <p class="lyric">LYRIC GOES HERE</p>
+                <p class="lyric2"></p>
               </div>
               <div class="titleBox">
                 <h3 id="currentlyPlaying"></h3>
@@ -74,9 +77,34 @@
             </div>
           </div>
           <div class="right">
-            <h2>Experimental Vylet Pony radio :3</h2>
-            <p>Chat room will go here eventually.</p>
-            <p>~ <a href="https://coding398.dev" target="_blank">coding398.dev</a>. add me on discord: coding398</p>
+            <div class="bgImgWrap">
+              <div class="voteFor">
+                <h2 text-align="center">Vote for the next track</h2>
+                <div class="trackVotes">
+                  <div class="trackV">
+                    <div style="background-image: url('https://img.youtube.com/vi/ilnEjHQddsw/sddefault.jpg')"></div>
+                    <p>Placeholder</p>
+                    <votes>1</votes>
+                  </div>
+                  <div class="trackV">
+                    <div style="background-image: url('https://img.youtube.com/vi/ilnEjHQddsw/sddefault.jpg')"></div>
+                    <p>Placeholder</p>
+                    <votes>1</votes>
+                  </div>
+                  <div class="trackV">
+                    <div style="background-image: url('https://img.youtube.com/vi/ilnEjHQddsw/sddefault.jpg')"></div>
+                    <p>Placeholder</p>
+                    <votes>1</votes>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="bgImgWrap">
+              <div class="listenersBox">
+                <p><i class='bx bxs-user'></i> ?</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -25,7 +25,10 @@ class room {
     this.dbData = dbData;
     this.ready = true;
     this.currentTrack = dbData.currentTrack || {};
-    this.lastTenTracks = dbData.lastTenTracks || []
+    this.lastTenTracks = dbData.lastTenTracks || [];
+    this.nextThreePick = dbData.nextThreePick || [];
+    this.votes = [0, 0, 0];
+    this.voteIID = 0;
 
     await this.tick();
     this.tickInterval = setInterval(() => {
@@ -40,23 +43,40 @@ class room {
   }
 
   async tick() {
-    if (!this.currentTrack?.id || Date.now() > this.currentTrack.nowEndTimer) {
+    if (!this.currentTrack?.id || Date.now() > this.currentTrack.nowEndTimer - 500) {
       const chooseFrom = this.dbData.possibleTracks.filter((a) => !this.lastTenTracks.includes(a))
-      const possibleTracks = (await db.tracks.find({ id: { $in: chooseFrom } }).toArray()).filter((t)=>t.album != "Monarch of Monsters");
-      const nextTrack = /*possibleTracks.find((t)=>t.title == "LESBIAN PONIES WITH WEAPONS") || */possibleTracks[Math.floor(Math.random() * possibleTracks.length)];
-
-      this.currentTrack = nextTrack
-      this.currentTrack.nowEndTimer = Date.now() + (nextTrack.endTime ? (nextTrack.endTime - nextTrack.startTime) * 1000 : nextTrack.length * 1000)
+      const possibleTracks = (await db.tracks.find({ id: { $in: chooseFrom } }).toArray()).filter((t) => t.album != "Monarch of Monsters");
+      const nextTrack = this.nextThreePick?.[2] ? (this.nextThreePick.map((a, i) => {
+        return {
+          votes: this.votes[i],
+          track: a
+        }
+      }).sort((a, b) => a.votes - b.votes)[0].track) : (possibleTracks[Math.floor(Math.random() * possibleTracks.length)])
+      const nextThreePick = possibleTracks.filter((t)=>t.title != nextTrack.title).sort(() => Math.random() - Math.random()).slice(0, 3);
+    
+      this.voteIID++;
+      this.nextThreePick = nextThreePick;
+      this.currentTrack = nextTrack;
+      this.votes = [0, 0, 0];
+      this.currentTrack.nextThreePick = nextThreePick.map((a)=>{
+        return {
+          ytID: a.ytID,
+          title: a.title
+        }
+      });
+      this.currentTrack.nowEndTimer = Date.now() + (nextTrack.endTime ? (nextTrack.endTime - nextTrack.startTime) * 1000 : nextTrack.length * 1000) + 200
 
       io().to(this.id).emit("trackChange", this.currentTrack);
+      io().to(this.id).emit("votes", [0,0,0]);
 
-      if(this.lastTenTracks.length >= 10) this.lastTenTracks.shift();
+      if (this.lastTenTracks.length >= 30) this.lastTenTracks.shift();
       this.lastTenTracks.push(nextTrack.id)
 
       await db.radios.updateOne({ id: this.id }, {
         $set: {
           currentTrack: this.currentTrack,
-          lastTenTracks: this.lastTenTracks
+          lastTenTracks: this.lastTenTracks,
+          nextThreePick: this.nextThreePick
         }
       })
       return;

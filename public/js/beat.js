@@ -5,7 +5,7 @@ function processSickBeats() {
 
   if(!player?.getCurrentTime) return;
 
-  const seekTime = player.getCurrentTime()
+  const seekTime = getBasedTime()
   const pBeats = currentTrack.beats.filter((l) => seekTime >= l);
   
   if(beatIndex != pBeats.length) {

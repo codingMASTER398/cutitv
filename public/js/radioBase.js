@@ -52,6 +52,7 @@ function load() {
     window.currentTrack = data.currentTrack
 
     updateCurrentlyPlaying();
+    updateVoter();
     initPlayer();
   })
 
@@ -64,7 +65,16 @@ function load() {
     window.currentTrack = data;
     player.loadVideoById(data.ytID)
     updateCurrentlyPlaying();
+    updateVoter();
   })
+
+  socket.on("votes", setVotes)
+
+  socket.on("listeners", (c)=>{
+    document.querySelector(`.listenersBox p`).innerHTML = `<i class='bx bxs-user'></i> ${Number(c)}`
+  })
+
+  window.socket = socket;
 }
 
 document.addEventListener("DOMContentLoaded", load);

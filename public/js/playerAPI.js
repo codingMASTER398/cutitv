@@ -3,6 +3,10 @@ function getSeekTime() {
   return (window.currentTrack.endTime || window.currentTrack.length) - (timeLeft / 1000);
 }
 
+function getBasedTime() {
+  return getSeekTime() - (window.currentTrack.startTime || 0);
+}
+
 function initPlayer() {
   if (!YT?.Player) {
     setTimeout(initPlayer, 100)
@@ -46,7 +50,7 @@ function initPlayer() {
       player.seekTo(getSeekTime())
       //console.log(2)
     }
-  }, 250)
+  }, 1000)
 
   setInterval(processLyrics, 100)
   setInterval(processThemes, 100)

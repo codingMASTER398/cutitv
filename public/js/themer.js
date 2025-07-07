@@ -10,8 +10,10 @@ function hexToRgb(hex) {
 }
 
 function processThemes() {
+  if(!window.currentTrack?.colors?.[0]) return;
+
   const colorSplit = window.currentTrack.colors[0];
-  const currentColor = window.currentTrack.colors[1][Math.floor(player.getCurrentTime() / colorSplit)];
+  const currentColor = window.currentTrack.colors[1][Math.floor(getBasedTime() / colorSplit)];
 
   const rgb = hexToRgb(currentColor);
 
@@ -28,6 +30,7 @@ function processThemes() {
   root.style.setProperty('--dark-base', darkbase);
   root.style.setProperty('--light-base', lightBase);
   root.style.setProperty('--dark-base-alpha', darkbaseAlpha);
+  root.style.setProperty('--thumbBlur', `url('https://img.youtube.com/vi/${window.currentTrack.ytID}/sddefault.jpg')`);
 
   if(window.currentTrack.theme != currentTheme) {
     currentTheme = window.currentTrack.theme

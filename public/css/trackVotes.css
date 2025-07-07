@@ -1,0 +1,146 @@
+.bgImgWrap {
+  background-image: var(--thumbBlur);
+  background-size: cover;
+  background-position: center;
+  backdrop-filter: blur(24px);
+}
+
+.voteFor,
+.listenersBox {
+  box-sizing: border-box;
+  padding: 2rem;
+  padding-left: 2rem;
+  color: white;
+
+  font-family: var(--font);
+  backdrop-filter: blur(48px);
+  background: var(--dark-base-alpha);
+  box-shadow: 0 -6px 12px rgba(255, 255, 255, 0.2) inset, 0 0 24px rgba(255, 255, 255, 0.2);
+
+  position: relative;
+}
+
+.voteFor::after,
+.voteFor::before {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  display: block;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  z-index: -1;
+}
+
+.voteFor::after {
+  bottom: 0;
+  right: 0;
+  display: block;
+  border-top: 100px solid transparent;
+  border-bottom: 100px solid var(--dark-base-alpha);
+}
+
+.voteFor::before {
+  top: 0;
+  left: 0;
+  border-bottom: 100px solid transparent;
+  border-top: 100px solid var(--dark-base-alpha);
+}
+
+.voteFor h2 {
+  margin: 0;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.trackVotes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.trackV {
+  margin: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  flex-grow: 1;
+  width: 33%;
+  padding: 6px;
+  position: relative;
+  font: var(--font);
+
+  cursor: pointer;
+}
+
+.trackV p {
+  margin: 0;
+  margin-top: 2px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  background-color: rgb(0, 0, 0, 0.5);
+  width: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.trackV div {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: block;
+  background-size: cover;
+  background-position: center;
+}
+
+.trackV votes {
+  position: absolute;
+  aspect-ratio: 1/1;
+  height: 24px;
+  top: 0;
+  right: 12px;
+  transform: translate(50%, -50%);
+  background-color: #a8a8a8;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: 0s;
+}
+
+.trackV.selected {
+  transition: 0s;
+  border: 2px solid white;
+}
+
+.trackV.selected votes {
+  background-color: white;
+  transition: 0s;
+}
+
+.bgImgWrap:has(.listenersBox),
+.listenersBox {
+  width: fit-content;
+  padding: 0;
+}
+
+.bgImgWrap:has(.listenersBox) {
+  justify-self: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.listenersBox {
+  padding: 0.5rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  margin: 0;
+}
+
+.listenersBox p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
