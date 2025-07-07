@@ -25,7 +25,7 @@ class room {
     this.dbData = dbData;
     this.ready = true;
     this.currentTrack = dbData.currentTrack || {};
-    this.lastTenTracks = db.lastTenTracks || []
+    this.lastTenTracks = dbData.lastTenTracks || []
 
     await this.tick();
     this.tickInterval = setInterval(() => {
