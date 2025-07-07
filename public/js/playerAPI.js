@@ -50,7 +50,7 @@ function initPlayer() {
       player.seekTo(getSeekTime())
       //console.log(2)
     }
-  }, 500)
+  }, 250)
 
   setInterval(processLyrics, 100)
   setInterval(processThemes, 100)
