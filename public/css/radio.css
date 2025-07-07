@@ -68,7 +68,7 @@ p, span, h1, h2, h3, h4, h5, h6 {
 
 .logo::after {
   position: absolute;
-  content: "alpha";
+  content: "beta";
   bottom: -3px;
   left: 90%;
   color: black;
