@@ -51,7 +51,7 @@ class room {
           votes: this.votes[i],
           track: a
         }
-      }).sort((a, b) => a.votes - b.votes)[0].track) : (possibleTracks[Math.floor(Math.random() * possibleTracks.length)])
+      }).sort((a, b) => b.votes - aa.votes)[0].track) : (possibleTracks[Math.floor(Math.random() * possibleTracks.length)])
       const nextThreePick = possibleTracks.filter((t)=>t.title != nextTrack.title).sort(() => Math.random() - Math.random()).slice(0, 3);
     
       this.voteIID++;
