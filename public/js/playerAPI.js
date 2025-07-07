@@ -46,7 +46,7 @@ function initPlayer() {
       player.seekTo(getSeekTime())
       player.playVideo()
       //console.log(1)
-    } else if (Math.abs(player.getCurrentTime() - getSeekTime()) > 1) {
+    } else if (Math.abs(player.getCurrentTime() - getSeekTime()) > 0.5) {
       player.seekTo(getSeekTime())
       //console.log(2)
     }
