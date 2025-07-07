@@ -71,7 +71,7 @@ function load() {
   socket.on("votes", setVotes)
 
   socket.on("listeners", (c)=>{
-    document.querySelector(`.listenersBox p`).innerHTML = `<i class='bx bxs-user'></i> ${Number(c)}`
+    document.querySelector(`.listenersBox p`).innerHTML = `<img src="/nerd/img/horseIcon.png"/> ${Number(c)}`
   })
 
   window.socket = socket;

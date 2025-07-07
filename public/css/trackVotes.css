@@ -144,3 +144,7 @@
   justify-content: center;
   gap: 6px;
 }
+
+.listenersBox img {
+  height: 18px;
+}
