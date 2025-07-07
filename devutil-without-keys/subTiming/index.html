@@ -1,0 +1,134 @@
+<div id="yt-player"></div>
+<br><br>
+<p class="status">do smth vro</p>
+<p class="lyrics">Lyrics: </p>
+<br>
+<!-- Video ID input -->
+<label for="videoId">Video ID:</label>
+<input name="videoId" type="text" class="videoId" />
+<br><br>
+
+<!-- Offset input -->
+<label for="offset">Video Offset (seconds):</label>
+<input name="offset" type="text" class="offset" />
+<br><br>
+
+<!-- Offset2 input -->
+<label for="offset2">Lyric Offset (seconds):</label>
+<input name="offset2" type="text" class="offset2" />
+<br><br>
+
+<!-- Lrclib ID input -->
+<label for="lrclibId">lrclib ID:</label>
+<input name="lrclibId" type="number" class="lrclibId" />
+
+<br>
+<button class="setAll">Set all</button>
+<button class="jumpToOffset">Jump to offset</button>
+<button class="jumpToFirstLyric">Jump to first lyric</button>
+
+<!-- Scripts -->
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+
+  let syncedLyrics, offset = 0, offset2 = 0;
+
+  function parseSyncedLyrics(synced) {
+    return synced.replaceAll("\r", "").trim().split('\n').map(line => {
+      const match = line.match(/^\[(\d{2}):(\d{2}(?:\.\d{1,3})?)\](.*)$/);
+      if (!match) return null;
+
+      const minutes = parseInt(match[1], 10);
+      const seconds = parseFloat(match[2]);
+      const lyric = match[3].trim();
+
+      return {
+        time: minutes * 60 + seconds,
+        lyric
+      };
+    }).filter(Boolean);
+  }
+
+  function setStatus(text) {
+    document.querySelector(`.status`).innerText = text;
+  }
+
+  function readyUp() {
+    player = new YT.Player('yt-player', {
+      height: '390',
+      width: '640',
+      videoId: "ysK77V2_qW0",
+      playerVars: {
+        'playsinline': 1,
+        'color': 'white',
+      },
+      events: {
+        'onReady': () => {
+        },
+        'onStateChange': () => { }
+      }
+    });
+  }
+
+  function loadLyricsById(id) {
+    setStatus(`loading lyrics`)
+
+    fetch(`https://lrclib.net/api/get/${id}`).then(async (r) => {
+      if (r.status != 200) {
+        setStatus("error getting the lyrics")
+        return;
+      }
+
+      const json = await r.json()
+
+      if (!json.id) {
+        setStatus(JSON.stringify(json))
+        return;
+      }
+
+      syncedLyrics = parseSyncedLyrics(json.syncedLyrics)
+      setStatus(`loaded ${json.name}`)
+    })
+  }
+
+  document.querySelector(`.videoId`).addEventListener(`change`, () => {
+    player.loadVideoById(document.querySelector(`.videoId`).value)
+  })
+
+  document.querySelector(`.offset`).addEventListener(`input`, () => {
+    offset = Number(document.querySelector(`.offset`).value)
+  })
+  document.querySelector(`.offset2`).addEventListener(`input`, () => {
+    offset2 = Number(document.querySelector(`.offset2`).value)
+  })
+
+  document.querySelector(`.lrclibId`).addEventListener(`change`, () => {
+    loadLyricsById(document.querySelector(`.lrclibId`).value)
+  })
+
+  document.querySelector(`.setAll`).addEventListener(`click`, () => {
+    player.loadVideoById(document.querySelector(`.videoId`).value)
+    offset = Number(document.querySelector(`.offset`).value)
+    offset2 = Number(document.querySelector(`.offset2`).value)
+    loadLyricsById(document.querySelector(`.lrclibId`).value)
+  })
+
+  document.querySelector(`.jumpToOffset`).addEventListener(`click`, () => {
+    player.seekTo(offset)
+  })
+  document.querySelector(`.jumpToFirstLyric`).addEventListener(`click`, () => {
+    player.seekTo(syncedLyrics[0].time + offset - offset2)
+  })
+
+  onYouTubeIframeAPIReady = readyUp;
+
+  setInterval(() => {
+    if (syncedLyrics) {
+      let aboveTime = syncedLyrics.filter((l) => {
+        return (player.getCurrentTime() - offset + offset2) >= l.time
+      });
+
+      document.querySelector(`.lyrics`).innerText = "Lyrics: " + (aboveTime[aboveTime.length - 1]?.lyric || "")
+    }
+  }, 100)
+</script>
