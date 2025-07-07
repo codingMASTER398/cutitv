@@ -46,11 +46,11 @@ function initPlayer() {
       player.seekTo(getSeekTime())
       player.playVideo()
       //console.log(1)
-    } else if (Math.abs(player.getCurrentTime() - getSeekTime()) > 0.5) {
+    } else if (Math.abs(player.getCurrentTime() - getSeekTime()) > 1) {
       player.seekTo(getSeekTime())
       //console.log(2)
     }
-  }, 1000)
+  }, 500)
 
   setInterval(processLyrics, 100)
   setInterval(processThemes, 100)
