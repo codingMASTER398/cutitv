@@ -6,7 +6,7 @@
 }
 
 .voteFor,
-.listenersBox {
+.bottomBox {
   box-sizing: border-box;
   padding: 2rem;
   padding-left: 2rem;
@@ -118,26 +118,27 @@
   transition: 0s;
 }
 
-.bgImgWrap:has(.listenersBox),
-.listenersBox {
+.bgImgWrap:has(.bottomBox),
+.bottomBox {
   width: fit-content;
   padding: 0;
 }
 
-.bgImgWrap:has(.listenersBox) {
-  justify-self: center;
-  margin-left: auto;
-  margin-right: auto;
+.bottomBoxes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.listenersBox {
+.bottomBox {
   padding: 0.5rem;
   padding-left: 3rem;
   padding-right: 3rem;
   margin: 0;
 }
 
-.listenersBox p {
+.bottomBox p {
   margin: 0;
   display: flex;
   align-items: center;
@@ -145,6 +146,6 @@
   gap: 6px;
 }
 
-.listenersBox img {
+.bottomBox img {
   height: 18px;
 }

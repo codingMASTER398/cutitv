@@ -2,6 +2,12 @@ const voteElements = [...document.querySelectorAll(`.trackV`)];
 
 function updateVoter() {
   if(!window.currentTrack.nextThreePick) return;
+  if(window.currentTrack.dictatorship) {
+    document.querySelector(`.democracy`).innerText = "DICTATORSHIP"
+  } else {
+    document.querySelector(`.democracy`).innerText = "DEMOCRACY"
+  }
+
   const nextThree = window.currentTrack.nextThreePick;
 
   voteElements.forEach((e, i)=>{

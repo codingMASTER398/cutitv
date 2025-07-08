@@ -40,6 +40,7 @@ function socketeer(server) {
     socket.emit("listeners", radioRoom.listeners)
 
     socket.on("vote", (i) => {
+      if (radioRoom.dictatorChosen && radioRoom.dictatorship) return;
       if (![0, 1, 2].includes(i)) return;
 
       if (radioRoom.voteIID != thisVoteIID) { // the song changed
@@ -51,6 +52,11 @@ function socketeer(server) {
 
       radioRoom.votes[i]++;
       thisVote = i;
+
+      if (radioRoom.dictatorship) {
+        radioRoom.dictatorChosen = true;
+        radioRoom.votes[i] += 98;
+      }
 
       io.to(data.radioID).emit("votes", radioRoom.votes)
     })

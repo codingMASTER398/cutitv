@@ -29,6 +29,7 @@ class room {
     this.nextThreePick = dbData.nextThreePick || [];
     this.votes = [0, 0, 0];
     this.voteIID = 0;
+    this.dictatorship = this.currentTrack?.dictatorship
 
     await this.tick();
     this.tickInterval = setInterval(() => {
@@ -52,13 +53,13 @@ class room {
           track: a
         }
       }).sort((a, b) => b.votes - a.votes)[0].track) : (possibleTracks[Math.floor(Math.random() * possibleTracks.length)])
-      const nextThreePick = possibleTracks.filter((t)=>t.title != nextTrack.title).sort(() => Math.random() - Math.random()).slice(0, 3);
-    
+      const nextThreePick = possibleTracks.filter((t) => t.title != nextTrack.title).sort(() => Math.random() - Math.random()).slice(0, 3);
+
       this.voteIID++;
       this.nextThreePick = nextThreePick;
       this.currentTrack = nextTrack;
       this.votes = [0, 0, 0];
-      this.currentTrack.nextThreePick = nextThreePick.map((a)=>{
+      this.currentTrack.nextThreePick = nextThreePick.map((a) => {
         return {
           ytID: a.ytID,
           title: a.title
@@ -66,8 +67,17 @@ class room {
       });
       this.currentTrack.nowEndTimer = Date.now() + (nextTrack.endTime ? (nextTrack.endTime - nextTrack.startTime) * 1000 : nextTrack.length * 1000) + 200
 
+      if (Math.random() > 0.8) {
+        this.dictatorChosen = false;
+        this.dictatorship = true;
+        this.currentTrack.dictatorship = true;
+      } else {
+        this.dictatorChosen = false;
+        this.dictatorship = false;
+      }
+
       io().to(this.id).emit("trackChange", this.currentTrack);
-      io().to(this.id).emit("votes", [0,0,0]);
+      io().to(this.id).emit("votes", [0, 0, 0]);
 
       if (this.lastTenTracks.length >= 30) this.lastTenTracks.shift();
       this.lastTenTracks.push(nextTrack.id)

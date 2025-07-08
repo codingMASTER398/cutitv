@@ -29,7 +29,7 @@
     <link href="/nerd/css/boringstyling.css" rel="stylesheet" rel="preload" as="style">
     <link href="/nerd/css/beats.css" rel="stylesheet" rel="preload" as="style">
     <link href="/nerd/css/trackVotes.css" rel="stylesheet" rel="preload" as="style">
-    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet' rel="preload" as="style">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Themes -->
     <link href="/nerd/css/theme/basscannon.css" rel="stylesheet" rel="preload" as="style">
@@ -38,71 +38,82 @@
     <link href="/nerd/css/theme/rainbows.css" rel="stylesheet" rel="preload" as="style">
 
     <div class="contentWrapper">
-      <div class="content">
-        <!-- Taskbar -->
-        <div class="taskbar">
-          <h1 class="logo">
-            cuti<span>.tv</span>
-          </h1>
-          <div class="right">
-            <h2>
-              <a href="<%=radio.artistSite%>" target="_blank">
-                <%=radio.title%>
-              </a> radio by <a href="https://coding398.dev" target="_blank">coding398</a>
-            </h2>
-          </div>
-        </div>
-      </div>
-
-      <!-- Content player -->
-      <div class="sbsWrap">
-        <div class="sideBySide">
-          <div class="left">
-            <div id="yt-player-wrapper">
-              <div id="yt-player-wrapper-wrapper">
-                <div id="yt-player"></div>
-              </div>
-              <div class="volumeSlider">
-                <i class='bxr  bx-volume-full'></i>
-                <input class="volumeSliderRange" type="range" min="0" max="100" step="1">
-              </div>
-              <div class="lyricsBox">
-                <p class="lyric">LYRIC GOES HERE</p>
-                <p class="lyric2"></p>
-              </div>
-              <div class="titleBox">
-                <h3 id="currentlyPlaying"></h3>
-                <h4 id="currentlyPlayingAlbum"></h4>
-              </div>
+      <div class="actualContentTrustMeBro">
+        <div class="content">
+          <!-- Taskbar -->
+          <div class="taskbar">
+            <h1 class="logo">
+              cuti<span>.tv</span>
+            </h1>
+            <div class="right">
+              <h2>
+                <a href="<%=radio.artistSite%>" target="_blank">
+                  <%=radio.title%>
+                </a> radio by <a href="https://coding398.dev" target="_blank">coding398</a>
+              </h2>
             </div>
           </div>
-          <div class="right">
-            <div class="bgImgWrap">
-              <div class="voteFor">
-                <h2 text-align="center">DEMOCRACY</h2>
-                <div class="trackVotes">
-                  <div class="trackV">
-                    <div style="background-image: url('https://img.youtube.com/vi/ilnEjHQddsw/sddefault.jpg')"></div>
-                    <p>Placeholder</p>
-                    <votes>1</votes>
-                  </div>
-                  <div class="trackV">
-                    <div style="background-image: url('https://img.youtube.com/vi/ilnEjHQddsw/sddefault.jpg')"></div>
-                    <p>Placeholder</p>
-                    <votes>1</votes>
-                  </div>
-                  <div class="trackV">
-                    <div style="background-image: url('https://img.youtube.com/vi/ilnEjHQddsw/sddefault.jpg')"></div>
-                    <p>Placeholder</p>
-                    <votes>1</votes>
-                  </div>
+        </div>
+
+        <!-- Content player -->
+        <div class="sbsWrap">
+          <div class="sideBySide">
+            <div class="left">
+              <div id="yt-player-wrapper">
+                <div id="yt-player-wrapper-wrapper">
+                  <div id="yt-player"></div>
+                </div>
+                <div class="volumeSlider">
+                  <i class='bx bxs-volume-full'></i>
+                  <input class="volumeSliderRange" type="range" min="0" max="100" step="1">
+                </div>
+                <div class="lyricsBox">
+                  <p class="lyric">LYRIC GOES HERE</p>
+                  <p class="lyric2"></p>
+                </div>
+                <div class="titleBox">
+                  <h3 id="currentlyPlaying"></h3>
+                  <h4 id="currentlyPlayingAlbum"></h4>
                 </div>
               </div>
             </div>
-            <br>
-            <div class="bgImgWrap">
-              <div class="listenersBox">
-                <p>?</p>
+            <div class="right">
+              <div class="bgImgWrap">
+                <div class="voteFor">
+                  <h2 text-align="center" class="democracy">DEMOCRACY</h2>
+                  <div class="trackVotes">
+                    <div class="trackV">
+                      <div style="background-image: url('https://img.youtube.com/vi/ilnEjHQddsw/sddefault.jpg')"></div>
+                      <p>Placeholder</p>
+                      <votes>1</votes>
+                    </div>
+                    <div class="trackV">
+                      <div style="background-image: url('https://img.youtube.com/vi/ilnEjHQddsw/sddefault.jpg')"></div>
+                      <p>Placeholder</p>
+                      <votes>1</votes>
+                    </div>
+                    <div class="trackV">
+                      <div style="background-image: url('https://img.youtube.com/vi/ilnEjHQddsw/sddefault.jpg')"></div>
+                      <p>Placeholder</p>
+                      <votes>1</votes>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="bottomBoxes">
+                <div class="bgImgWrap">
+                  <div class="listenersBox bottomBox">
+                    <p>?</p>
+                  </div>
+                </div>
+                <div class="bgImgWrap">
+                  <div class="linksBox bottomBox">
+                    <a href="javascript:hideUI()"><i class='bx bxs-hide'></i></a>
+                    <a class="ytLink" target="_blank"><i class='bx bxl-youtube'></i></a>
+                    <a href="https://discord.gg/Sm9Rs5mA3b" target="_blank"><i class='bx bxl-discord-alt'></i></a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

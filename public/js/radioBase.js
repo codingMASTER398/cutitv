@@ -1,5 +1,6 @@
 const imgOverrides = {
-  "UCAisUe6-VA": "/nerd/img/lesbianPonies.png"
+  "UCAisUe6-VA": "/nerd/img/lesbianPonies.png",
+  "ABJ4lWZD_qM": "/nerd/img/SYNDICATE_Full.jpg"
 }
 
 function loadingOut() {
@@ -23,6 +24,8 @@ function updateCurrentlyPlaying() {
     ), url("${imgOverrides[window.currentTrack.ytID] || `https://img.youtube.com/vi/${window.currentTrack.ytID}/maxresdefault.jpg`}");
   }
 `;
+
+  document.querySelector(`.ytLink`).href = `https://youtu.be/${window.currentTrack.ytID}?t=${Math.round(getSeekTime())}`
 
   document.title = window.currentTrack.title
 }
@@ -70,7 +73,7 @@ function load() {
 
   socket.on("votes", setVotes)
 
-  socket.on("listeners", (c)=>{
+  socket.on("listeners", (c) => {
     document.querySelector(`.listenersBox p`).innerHTML = `<img src="/nerd/img/horseIcon.png"/> ${Number(c)}`
   })
 
@@ -78,3 +81,11 @@ function load() {
 }
 
 document.addEventListener("DOMContentLoaded", load);
+
+
+function hideUI() {
+  document.querySelector(`.actualContentTrustMeBro`).style.opacity = "0"
+  document.querySelector(`body`).addEventListener(`click`, () => {
+    document.querySelector(`.actualContentTrustMeBro`).style.opacity = "1"
+  }, { once: true })
+}
